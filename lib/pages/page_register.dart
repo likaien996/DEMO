@@ -21,110 +21,172 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent,),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.teal), // 图标颜色
+      ),
       body: Stack(
         children: [
-          ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            children: [
-              const SizedBox(
-                height: 100,
+          // 背景颜色
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF6dd5ed), Color(0xFF2193b0)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
+            ),
+          ),
+          ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            children: [
+              const SizedBox(height: 80),
               const Icon(
                 Icons.lock_open_rounded,
-                size: 200,
+                size: 100,
+                color: Colors.white,
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 20),
               const Text(
                 "Create your account",
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 25),
-              TextField(
+              const SizedBox(height: 30),
+              _buildTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                  border: OutlineInputBorder(),
-                ),
+                hintText: "Email",
+                icon: Icons.email,
               ),
-              const SizedBox(height: 10),
-              TextField(
+              const SizedBox(height: 20),
+              _buildTextField(
                 controller: _passwordController,
+                hintText: "Password",
+                icon: Icons.lock,
                 obscureText: _showPassword,
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      _showPassword ? Icons.visibility_off : Icons.visibility,
-                    ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _showPassword = !_showPassword;
+                    });
+                  },
+                  icon: Icon(
+                    _showPassword ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              TextField(
+              const SizedBox(height: 20),
+              _buildTextField(
                 controller: _confirmPasswordController,
+                hintText: "Confirm Password",
+                icon: Icons.lock,
                 obscureText: _showPassword,
-                decoration: InputDecoration(
-                  hintText: "Confirm Password",
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      _showPassword ? Icons.visibility_off : Icons.visibility,
-                    ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _showPassword = !_showPassword;
+                    });
+                  },
+                  icon: Icon(
+                    _showPassword ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              FilledButton(
-                onPressed: () {
-                  _register(context);
-                },
-                child: const Text("Sign Up"),
-              ),
-              const SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Already have an account?",
-                  ),
-                  const SizedBox(width: 4),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    behavior: HitTestBehavior.opaque,
-                    child: const Text(
-                      "Login now",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              const SizedBox(height: 30),
+              _buildSignUpButton(),
+              const SizedBox(height: 30),
+              _buildFooter(context),
             ],
           ),
-          _showLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : const SizedBox(),
+          if (_showLoading) const Center(child: CircularProgressIndicator()),
         ],
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData icon,
+    bool obscureText = false,
+    Widget? suffixIcon,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: Colors.teal),
+        suffixIcon: suffixIcon,
+        hintText: hintText,
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        hintStyle: TextStyle(color: Colors.grey[400]),
+      ),
+      style: const TextStyle(fontSize: 16),
+    );
+  }
+
+  Widget _buildSignUpButton() {
+    return ElevatedButton(
+      onPressed: () {
+        _register(context);
+      },
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        backgroundColor: Colors.tealAccent, // 使用亮绿色
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 5, // 增加阴影
+        textStyle: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.black, // 确保文字在按钮上清晰可见
+        ),
+      ),
+      child: const Text("Sign Up"),
+    );
+  }
+
+  Widget _buildFooter(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Already have an account?",
+              style: TextStyle(color: Colors.white),
+            ),
+            const SizedBox(width: 4),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                "Login now",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
