@@ -1,0 +1,198 @@
+[
+  {
+    "price": 20,
+    "imagePath": "assets/img/aloha_chicken.png",
+    "name": "Aloha Chicken Pizza",
+    "description": "100% Mozzarella cheese with succulent shredded chicken & generous amounts of juicy pineapples. Surfs up",
+    "id": "1",
+    "category": "pizza",
+    "availableAddons": [
+      {
+        "price": 20,
+        "name": "Small Size",
+        "id": "1"
+      },
+      {
+        "price": 25,
+        "name": "Medium Size",
+        "id": "2"
+      },
+      {
+        "price": 32,
+        "name": "Large Size",
+        "id": "3"
+      }
+    ]
+  },
+  {
+    "price": 20,
+    "imagePath": "assets/img/beef_pepperoni.png",
+    "name": "Beef Pepperoni Pizza",
+    "description": "The all time favorite with generous portions of beef pepperoni & 100% mozzarella cheese",
+    "id": "2",
+    "category": "pizza",
+    "availableAddons": [
+      {
+        "price": 20,
+        "name": "Small Size",
+        "id": "1"
+      },
+      {
+        "price": 25,
+        "name": "Medium Size",
+        "id": "2"
+      },
+      {
+        "price": 32,
+        "name": "Large Size",
+        "id": "3"
+      }
+    ]
+  },
+  {
+    "price": 18,
+    "imagePath": "assets/img/hawaiian_chicken.png",
+    "name": "Hawaiian Chicken Pizza",
+    "description": "Served with tomato sauce, chicken meat, pineapples & mozzarella cheese",
+    "id": "3",
+    "category": "pizza",
+    "availableAddons": [
+      {
+        "price": 18,
+        "name": "Small Size",
+        "id": "1"
+      },
+      {
+        "price": 23,
+        "name": "Medium Size",
+        "id": "2"
+      },
+      {
+        "price": 30,
+        "name": "Large Size",
+        "id": "3"
+      }
+    ]
+  },
+  {
+    "price": 15,
+    "imagePath": "assets/img/bbq_bonanza.png",
+    "name": "BBQ Bonanza Pizza",
+    "description": "Pezzo Signature Sauce, Mozzarella Cheese, Oregano Chicken, Red Onion drizzled with BBQ Sauce",
+    "id": "4",
+    "category": "pizza",
+    "availableAddons": [
+      {
+        "price": 15,
+        "name": "Small Size",
+        "id": "1"
+      },
+      {
+        "price": 21,
+        "name": "Medium Size",
+        "id": "2"
+      },
+      {
+        "price": 29,
+        "name": "Large Size",
+        "id": "3"
+      }
+    ]
+  },
+  {
+    "name": "Sprite",
+    "description": "325ml",
+    "price": 4.0,
+    "imagePath": "assets/img/sprite.png",
+    "id": "1",
+    "category": "drinks",
+    "availableAddons": []
+  },
+  {
+    "name": "Ice Lemon Tea",
+    "description": "320ml",
+    "price": 4.0,
+    "imagePath": "assets/img/ice_lemon_tea.png",
+    "id": "5",
+    "category": "drinks",
+    "availableAddons": []
+  },
+  {
+    "name": "100 Plus",
+    "description": "325ml",
+    "price": 4.0,
+    "imagePath": "assets/img/100_plus.png",
+    "id": "6",
+    "category": "drinks",
+    "availableAddons": []
+  },
+  {
+    "name": "Coke",
+    "description": "320ml",
+    "price": 4.0,
+    "imagePath": "assets/img/coke.png",
+    "id": "7",
+    "category": "drinks",
+    "availableAddons": []
+  },
+  {
+    "name": "Beef Burger",
+    "price": 12,
+    "description": "Consisting of a juicy beef Patty with lettuce, tomato and cheese, served in a sesame bagel, it is a burger classic",
+    "imagePath": "assets/img/beef_burger.png",
+    "id": "8",
+    "category": "burger",
+    "availableAddons": [
+      {
+        "name": "Cheese Slice",
+        "price": 2.0,
+        "id": "1"
+      }
+    ]
+  },
+  {
+    "name": "Spicy Chicken Burger",
+    "price": 11,
+    "description": "The burger features a spicy chicken Patty with chipotle, spicy Jack cheese and spicy mayonnaise, and is served in a soft bun for those who like spicy flavors",
+    "imagePath": "assets/img/spicy_chicken_burger.png",
+    "id": "9",
+    "category": "burger",
+    "availableAddons": [
+      {
+        "name": "Cheese Slice",
+        "price": 2.0,
+        "id": "1"
+      }
+    ]
+  },
+  {
+    "name": "Veggie Burger",
+    "price": 8,
+    "description": "Served with a black bean vegetarian Patty with fresh avocado slices, red onion and vegan mayonnaise wrapped in whole wheat bread, it's a healthy vegetarian option",
+    "imagePath": "assets/img/veggie_burger.png",
+    "id": "10",
+    "category": "burger",
+    "availableAddons": [
+      {
+        "name": "Cheese Slice",
+        "price": 2.0,
+        "id": "1"
+      }
+    ]
+  },
+  {
+    "name": "Fish Burger",
+    "price": 10,
+    "description": "Packed with crispy fish filet with tartar sauce, lettuce and pickle slices in a Caesar roll, it is delicious and suitable for seafood lovers",
+    "imagePath": "assets/img/fish_burger.png",
+    "id": "11",
+    "category": "burger",
+    "availableAddons": [
+      {
+        "name": "Cheese Slice",
+        "price": 2.0,
+        "id": "1"
+      }
+    ]
+  }
+]
