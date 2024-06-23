@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "delivery-food-6ad88",
+          "appId": "1:162546377181:android:a4b2c8f03930cb2eea5634",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "delivery-food-6ad88",
+          "configurations": {
+            "android": "1:162546377181:android:a4b2c8f03930cb2eea5634",
+            "ios": "1:162546377181:ios:be3b7bc641422947ea5634"
+          }
+        }
+      }
+    }
+  }
+}
