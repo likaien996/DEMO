@@ -16,11 +16,11 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  var _cardNumberController = TextEditingController();
-  var _expiryDateController = TextEditingController();
-  var _cardHolderNameController = TextEditingController();
-  var _cvvCodeController = TextEditingController();
-  var _deliveryAddressController = TextEditingController();
+  final _cardNumberController = TextEditingController();
+  final _expiryDateController = TextEditingController();
+  final _cardHolderNameController = TextEditingController();
+  final _cvvCodeController = TextEditingController();
+  final _deliveryAddressController = TextEditingController();
 
   bool _showLoading = false;
 
@@ -31,13 +31,11 @@ class _PaymentPageState extends State<PaymentPage> {
     userCard = temp;
     if (temp != null) {
       setState(() {
-        _cardNumberController = TextEditingController(text: temp.cardNumber);
-        _expiryDateController = TextEditingController(text: temp.expiryDate);
-        _cardHolderNameController =
-            TextEditingController(text: temp.cardHolderName);
-        _cvvCodeController = TextEditingController(text: temp.cvvCode);
-        _deliveryAddressController =
-            TextEditingController(text: temp.deliveryAddress);
+        _cardNumberController.text = temp.cardNumber;
+        _expiryDateController.text = temp.expiryDate;
+        _cardHolderNameController.text = temp.cardHolderName;
+        _cvvCodeController.text = temp.cvvCode;
+        _deliveryAddressController.text = temp.deliveryAddress;
       });
     }
   }
@@ -53,121 +51,140 @@ class _PaymentPageState extends State<PaymentPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Checkout"),
+        backgroundColor: const Color(0xFF42A5F5), // 使用现代感的蓝色
+        centerTitle: true,
       ),
-      body: Stack(
+      body: ListView(
+        padding: const EdgeInsets.all(20),
         children: [
-          ListView(
-            padding: const EdgeInsets.all(15),
-            children: [
-              TextField(
-                controller: _cardNumberController,
-                decoration: const InputDecoration(
-                  hintText: "Card Number",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _expiryDateController,
-                decoration: const InputDecoration(
-                  hintText: "Expiry Date",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _cardHolderNameController,
-                decoration: const InputDecoration(
-                  hintText: "Card Holder Name",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _cvvCodeController,
-                decoration: const InputDecoration(
-                  hintText: "CVV Code",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _deliveryAddressController,
-                decoration: const InputDecoration(
-                  hintText: "Delivery Address",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              FilledButton(
-                  onPressed: () {
-                    _pay(context);
-                  },
-                  child: const Text("Pay Now")),
-            ],
+          _buildTextField(
+            controller: _cardNumberController,
+            hintText: "Card Number",
+            icon: Icons.credit_card,
           ),
-          _showLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : const SizedBox()
+          const SizedBox(height: 20),
+          _buildTextField(
+            controller: _expiryDateController,
+            hintText: "Expiry Date",
+            icon: Icons.calendar_today,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            controller: _cardHolderNameController,
+            hintText: "Card Holder Name",
+            icon: Icons.person,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            controller: _cvvCodeController,
+            hintText: "CVV Code",
+            icon: Icons.lock,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            controller: _deliveryAddressController,
+            hintText: "Delivery Address",
+            icon: Icons.location_on,
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: _pay,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF42A5F5), // 蓝色按钮
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            child: const Text("Pay Now"),
+          ),
         ],
       ),
     );
   }
 
-  void _pay(BuildContext context) async {
+  Widget _buildTextField(
+      {required TextEditingController controller,
+      required String hintText,
+      required IconData icon}) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        prefixIcon: Icon(icon, color: const Color(0xFF42A5F5)), // 图标使用蓝色
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        filled: true,
+        fillColor: Colors.grey[200], // 浅灰色背景
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      ),
+      style: const TextStyle(fontSize: 16),
+    );
+  }
+
+  void _pay() async {
     var cardNumber = _cardNumberController.text;
     if (cardNumber.isEmpty) {
-      myShowDialog(context, "Input cardNumber");
+      myShowDialog(context, "Please enter card number");
       return;
     }
     var expiryDate = _expiryDateController.text;
     if (expiryDate.isEmpty) {
-      myShowDialog(context, "Input expiryDate");
+      myShowDialog(context, "Please enter expiry date");
       return;
     }
     var cardHolderName = _cardHolderNameController.text;
     if (cardHolderName.isEmpty) {
-      myShowDialog(context, "Input cardHolderName");
+      myShowDialog(context, "Please enter card holder name");
       return;
     }
     var cvvCode = _cvvCodeController.text;
     if (cvvCode.isEmpty) {
-      myShowDialog(context, "Input cvvCode");
+      myShowDialog(context, "Please enter CVV code");
       return;
     }
     var deliveryAddress = _deliveryAddressController.text;
     if (deliveryAddress.isEmpty) {
-      myShowDialog(context, "Input Delivery Address");
+      myShowDialog(context, "Please enter delivery address");
       return;
     }
 
     var dialogRes = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Confirm Payment"),
+        title: const Text(
+          "Confirm Payment",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         content: SingleChildScrollView(
           child: ListBody(
             children: [
-              Text("Card Number: $cardNumber"),
-              Text("Expiry Date: $expiryDate"),
-              Text("Card Holder Name: $cardHolderName"),
-              Text("CVV Code: $cvvCode"),
-              Text("Delivery Address: $deliveryAddress"),
+              Text("Card Number: $cardNumber",
+                  style: const TextStyle(fontSize: 16)),
+              Text("Expiry Date: $expiryDate",
+                  style: const TextStyle(fontSize: 16)),
+              Text("Card Holder Name: $cardHolderName",
+                  style: const TextStyle(fontSize: 16)),
+              Text("CVV Code: $cvvCode", style: const TextStyle(fontSize: 16)),
+              Text("Delivery Address: $deliveryAddress",
+                  style: const TextStyle(fontSize: 16)),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+            child: const Text("Cancel", style: TextStyle(fontSize: 16)),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context, true);
             },
-            child: const Text("Yes"),
+            child: const Text("Yes", style: TextStyle(fontSize: 16)),
           ),
         ],
       ),
@@ -196,34 +213,28 @@ class _PaymentPageState extends State<PaymentPage> {
       ),
     );
 
+    setState(() {
+      _showLoading = false;
+    });
+
     if (!context.mounted) {
-      setState(() {
-        _showLoading = false;
-      });
       return;
     }
+
     if (!res) {
-      setState(() {
-        _showLoading = false;
-      });
-      myShowDialog(context, "Error");
+      myShowDialog(context, "Error saving card details");
       return;
     }
 
     var displayCartReceipt =
         context.read<CartProvider>().displayCartReceipt(deliveryAddress);
-
     var orderId = await OrderService.saveOrder(displayCartReceipt);
-    setState(() {
-      _showLoading = false;
-    });
-    if (!context.mounted) {
-      return;
-    }
+
     if (orderId.isEmpty) {
-      myShowDialog(context, "Error");
+      myShowDialog(context, "Error processing order");
       return;
     }
+
     context.read<CartProvider>().clearCart();
     Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx) {
       return DeliveryProgressPage(orderId: orderId);
