@@ -154,7 +154,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         Container(height: 1, color: Colors.grey),
                         const SizedBox(height: 10),
                         const Text(
-                          "Add-ons",
+                          "Selections",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
